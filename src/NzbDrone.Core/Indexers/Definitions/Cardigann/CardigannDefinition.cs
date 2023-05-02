@@ -74,6 +74,8 @@ namespace NzbDrone.Core.Indexers.Definitions.Cardigann
 
     public class CapabilitiesBlock
     {
+        public int? LimitsMax { get; set; }
+        public int? LimitsDefault { get; set; }
         public Dictionary<string, string> Categories { get; set; }
         public List<CategorymappingBlock> Categorymappings { get; set; }
         public Dictionary<string, List<string>> Modes { get; set; }
