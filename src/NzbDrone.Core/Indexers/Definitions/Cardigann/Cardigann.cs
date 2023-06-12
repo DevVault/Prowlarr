@@ -47,14 +47,14 @@ namespace NzbDrone.Core.Indexers.Definitions.Cardigann
         {
             get
             {
-                var definition = _definitionService.GetCachedDefinition(Settings.DefinitionFile);
-
-                if (definition.Search != null && definition.Search.PageSize > 0)
+                if (Definition is null)
                 {
-                    return definition.Search.PageSize;
+                    return 0;
                 }
 
-                return 0;
+                var definition = _definitionService.GetCachedDefinition(Settings.DefinitionFile);
+
+                return definition.Search is { PageSize: > 0 } ? definition.Search.PageSize : 1;
             }
         }
 
@@ -69,7 +69,7 @@ namespace NzbDrone.Core.Indexers.Definitions.Cardigann
 
                 var definition = _definitionService.GetCachedDefinition(Settings.DefinitionFile);
 
-                return definition.Search != null && definition.Search.PageSize > 0;
+                return definition.Search is { PageSize: > 0 };
             }
         }
 

@@ -20,6 +20,12 @@ namespace NzbDrone.Core.IndexerSearch.Definitions
         public string Source { get; set; }
         public string Host { get; set; }
 
+        protected SearchCriteriaBase()
+        {
+            Limit = 100;
+            Offset = 0;
+        }
+
         public override string ToString() => $"{SearchQuery}, Offset: {Offset}, Limit: {Limit}, Categories: [{string.Join(", ", Categories)}]";
 
         public virtual string SearchQuery => $"Term: [{SearchTerm}]";

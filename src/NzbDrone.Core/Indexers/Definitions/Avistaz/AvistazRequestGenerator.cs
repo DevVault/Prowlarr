@@ -36,7 +36,7 @@ namespace NzbDrone.Core.Indexers.Definitions.Avistaz
                 { "limit", Math.Min(PageSize, searchCriteria.Limit).ToString() }
             };
 
-            if (searchCriteria.Limit is > 0 && searchCriteria.Offset is > 0)
+            if (searchCriteria.Limit > 0 && searchCriteria.Offset > 0)
             {
                 var page = (int)(searchCriteria.Offset / searchCriteria.Limit) + 1;
                 qc.Add("page", page.ToString());
