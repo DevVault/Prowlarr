@@ -13,6 +13,10 @@ import ModalBody from 'Components/Modal/ModalBody';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import ModalHeader from 'Components/Modal/ModalHeader';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
+import Table from 'Components/Table/Table';
+import TableBody from 'Components/Table/TableBody';
+import TableRow from 'Components/Table/TableRow';
 import TagListConnector from 'Components/TagListConnector';
 import { kinds } from 'Helpers/Props';
 import DeleteIndexerModal from 'Indexer/Delete/DeleteIndexerModal';
@@ -236,6 +240,45 @@ function IndexerInfoModalContent(props: IndexerInfoModalContentProps) {
               />
             </DescriptionList>
           </div>
+        </FieldSet>
+        <FieldSet legend={translate('IndexerCategories')}>
+          <Table
+            columns={[
+              {
+                name: 'id',
+                label: translate('Id'),
+                isVisible: true,
+              },
+              {
+                name: 'name',
+                label: translate('Name'),
+                isVisible: true,
+              },
+            ]}
+          >
+            {capabilities.categories
+              .sort((a, b) => a.id - b.id)
+              .map((category) => {
+                return (
+                  <TableBody key={category.id}>
+                    <TableRow key={category.id}>
+                      <TableRowCell>{category.id}</TableRowCell>
+                      <TableRowCell>{category.name}</TableRowCell>
+                    </TableRow>
+                    {category.subCategories
+                      .sort((a, b) => a.id - b.id)
+                      .map((subCategory) => {
+                        return (
+                          <TableRow key={subCategory.id}>
+                            <TableRowCell>{subCategory.id}</TableRowCell>
+                            <TableRowCell>{subCategory.name}</TableRowCell>
+                          </TableRow>
+                        );
+                      })}
+                  </TableBody>
+                );
+              })}
+          </Table>
         </FieldSet>
       </ModalBody>
       <ModalFooter>
